@@ -7,6 +7,10 @@ PrivSynth is a Streamlit application designed to create differentially private t
 2. **Privacy Preservation**: Incorporates differential privacy techniques to protect individual data entries in the synthetic data.
 3. **Customizable GAN Models**: Allows users to define and tweak the generator and discriminator models based on their specific data and requirements.
 4. **Versatile Application**: Suitable for various types of tabular data, especially where privacy is a paramount concern, such as in medical or financial datasets.
+5. **User Authentication**: Features a secure login and signup system using SQLite, ensuring that only authorized users can access the tool and create synthetic datasets.
+6. **Statistical Insights**: Displays statistics for privacy and distribution match, providing users with clear indicators of whether the synthetic data maintains privacy and closely matches the original dataset.
+7. **Parameter Customization**: Enables users to define and adjust critical parameters such as epochs, sigma, weight clip, number of critics, batch size, and learning rate. These settings give users control over the level of differential privacy and the quality of the synthetic data generated.
+
 
 ## Installation
 To install PrivSynth, simply run:
