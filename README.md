@@ -49,7 +49,7 @@ PrivSynth integrates methods to calculate the privacy loss (epsilon) for the syn
 PrivSynth comes with example scripts and detailed documentation to guide users through the process of generating differentially private synthetic data. These resources are invaluable for understanding the best practices and nuances of working with DPWGANs.
 
 ## Acknowledgements
-PrivSynth builds upon the foundational work of DPWGAN, initially developed and provided by the team at Civis Analytics. The tool enhances their original implementation, making it more accessible and applicable for a broader range of users and use cases.
+PrivSynth builds upon the foundational work of DPWGAN, initially developed and provided by the team at Civis Analytics. The tool enhances their original implementation, making it more accessible and applicable for a broader range of users and use cases. Their codebase can be found here: https://github.com/civisanalytics/dpwgan
 
 ---
 
