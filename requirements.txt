@@ -1,0 +1,9 @@
+streamlit
+pandas
+torch
+Pillow
+opencv-python
+scipy
+torchvision
+scikit-learn
+altair<5
