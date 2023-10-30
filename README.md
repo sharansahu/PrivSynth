@@ -24,6 +24,11 @@ streamlit run app.py
 
 The app provides a user-friendly interface for setting up the DPWGAN, including the definition of generator and discriminator models, as well as configuring the noise function and other training parameters.
 
+## Model
+
+This model is largely an implementation of the [Differentially Private Generative Adversarial Network model](https://arxiv.org/abs/1802.06739)
+from Xie, Lin, Wang, Wang, and Zhou (2018).
+
 ### Setting Up the DPWGAN
 1. **Define the Generator and Discriminator Models**: PrivSynth allows for the customization of these models. Users can select different layers, activation functions, and other architectural details.
    
