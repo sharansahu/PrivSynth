@@ -1,91 +1,47 @@
-# calhacks-ml-model
+# PrivSynth: A Streamlit App for Generating Differentially Private Tabular Data
 
-# DPWGAN
-Code for a differentially private Wasserstein GAN implemented in [PyTorch](https://pytorch.org/)
+PrivSynth is a Streamlit application designed to create differentially private tabular data using Differentially Private Wasserstein Generative Adversarial Networks (DPWGAN). This tool is particularly useful for users who need to generate synthetic data sets that closely resemble original data while ensuring the privacy of individual data entries.
+
+## Key Features
+1. **Ease of Use**: The Streamlit interface makes it straightforward to set up and use, even for those with limited technical background in data privacy or machine learning.
+2. **Privacy Preservation**: Incorporates differential privacy techniques to protect individual data entries in the synthetic data.
+3. **Customizable GAN Models**: Allows users to define and tweak the generator and discriminator models based on their specific data and requirements.
+4. **Versatile Application**: Suitable for various types of tabular data, especially where privacy is a paramount concern, such as in medical or financial datasets.
 
 ## Installation
+To install PrivSynth, simply run:
 
-This package requires Python >= 3.5
+```
+pip install -r requirements.txt
+```
 
 ## Usage
-
-Setting up, training, and generating from a DPWGAN:
-
-```
-gan = DPWGAN(generator, discriminator, noise_function)
-gan.train(data)
-synthetic_data = gan.generate(100)
-```
-
-`generator` and `discriminator` should be `torch.nn` modules, and
-`noise_function` should generate random data as input to the `generator`.
-As a simple example:
+After installation, you can start the PrivSynth app locally using:
 
 ```
-# simple generator module
-generator = torch.nn.Sequential(
-    torch.nn.Linear(noise_dim, hidden_dim),
-    torch.nn.ReLU(),
-    MultiCategoryGumbelSoftmax(hidden_dim, output_dims)
-)
-
-# simple discriminator module
-discriminator = torch.nn.Sequential(
-    torch.nn.Linear(sum(output_dims), hidden_dim),
-    torch.nn.ReLU(),
-    torch.nn.Linear(hidden_dim, 1)
-)
-
-# simple noise function (input to generator module)
-def noise_function(n):
-    return torch.randn(n, noise_dim)
+streamlit run app.py
 ```
 
-The [`examples`](examples) folder has four scripts to demonstrate setting
-up, training, and generating data with a DPWGAN with categorical data sets.
+The app provides a user-friendly interface for setting up the DPWGAN, including the definition of generator and discriminator models, as well as configuring the noise function and other training parameters.
 
-[`simple_example.py`](examples/simple_example.py) shows how to create
-a generator, discriminator, and noise function, and applies the DPWGAN
-to a toy categorical data set.
+### Setting Up the DPWGAN
+1. **Define the Generator and Discriminator Models**: PrivSynth allows for the customization of these models. Users can select different layers, activation functions, and other architectural details.
+   
+2. **Configure the Noise Function**: The noise function is crucial in generating the initial input for the generator model. This function can be tailored according to the nature of the data being synthesized.
 
-[`image_example.py`](examples/simple_example.py) applies a DPWGAN to
-CT scan data. Download the data set at (https://www.kaggle.com/datasets/kmader/siim-medical-images/data).
+### Training and Generating Data
+- **Train the DPWGAN**: Once the setup is complete, users can train the DPWGAN using their own data. PrivSynth provides options to adjust training parameters such as batch size, number of epochs, and learning rates.
+- **Generate Synthetic Data**: After training, users can generate synthetic data that mirrors the statistical properties of the original dataset while maintaining privacy.
 
-[`mnist_example.py`](examples/mnist_example.py) applies a DPWGAN to
-MNIST data.
+## Privacy Calculations
+PrivSynth integrates methods to calculate the privacy loss (epsilon) for the synthetic data generation process, adhering to the principles of differential privacy. This calculation is crucial for understanding the trade-off between data utility and privacy.
 
-If you want to print the training losses,
-set the logging level to `logging.INFO`:
-
-```
-import logging
-logging.basicConfig(level=logging.INFO)
-```
-
-## Model
-
-This model is largely an implementation of the [Differentially Private Generative Adversarial Network model](https://arxiv.org/abs/1802.06739)
-from Xie, Lin, Wang, Wang, and Zhou (2018).
-
-## Calculating epsilon
-
-You can use the [compute_dp_sgd_privacy](https://github.com/tensorflow/privacy/blob/979748e09c416ea2d4f85e09b033aa9aa097ead2/tensorflow_privacy/privacy/analysis/compute_dp_sgd_privacy.py)
-script in the [TensorFlow Privacy](https://github.com/tensorflow/privacy)
-library to calculate the privacy loss epsilon for a given data set and training regime.
-`N` corresponds to the number of data points, and `noise_multiplier` corresponds to `sigma`.
-`batch_size` and `epochs` are the same as in training.
-`delta` (the tolerance probability for privacy loss beyond `epsilon`)
-can be set according to your needs or optimized (the library currently uses `1e-6` as a reasonable default).
-The method also gives an estimate of α for (α, ε)-Rényi differential privacy.
-
-Note that calculating the appropriate value for the `weight_clip` is non-trivial,
-and depends on the architecture of the discriminator. See section 3.4 of
-[Xie, Lin, Wang, Wang, and Zhou (2018)](https://arxiv.org/abs/1802.06739)
-for details, where `c_p` corresponds to `weight_clip`.
-`sigma` should be set to the product of `sigma_n` and `c_g`.
+## Examples and Documentation
+PrivSynth comes with example scripts and detailed documentation to guide users through the process of generating differentially private synthetic data. These resources are invaluable for understanding the best practices and nuances of working with DPWGANs.
 
 ## Acknowledgements
+PrivSynth builds upon the foundational work of DPWGAN, initially developed and provided by the team at Civis Analytics. The tool enhances their original implementation, making it more accessible and applicable for a broader range of users and use cases.
 
-Starter code is largely based off and modified using https://github.com/civisanalytics/dpwgan
+---
 
-# PrivSynth
+PrivSynth stands out as a practical, accessible solution for generating differentially private synthetic data, catering to the growing need for privacy-preserving data analysis tools in various industries.
